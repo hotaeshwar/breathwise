@@ -87,6 +87,38 @@ export default function AdminPage() {
   const [customDate, setCustomDate] = useState("");
   const [sortOrder, setSortOrder] = useState("desc"); // 'desc' (newest first) or 'asc'
 
+  // Option to hide old / legacy webinar entries
+  const [hideOldEntries, setHideOldEntries] = useState(true);
+  const [hiddenTxIds, setHiddenTxIds] = useState(() => {
+    if (typeof window !== "undefined") {
+      try {
+        return JSON.parse(localStorage.getItem("admin_hidden_tx_ids") || "[]");
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
+  const toggleHideTx = (id) => {
+    if (!id) return;
+    setHiddenTxIds((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+      try {
+        localStorage.setItem("admin_hidden_tx_ids", JSON.stringify(next));
+      } catch (e) {}
+      return next;
+    });
+  };
+
+  const handleUnhideAll = () => {
+    setHiddenTxIds([]);
+    try {
+      localStorage.removeItem("admin_hidden_tx_ids");
+    } catch (e) {}
+    setHideOldEntries(false);
+  };
+
   // Selected Transaction Modal
   const [selectedTx, setSelectedTx] = useState(null);
   const [copiedId, setCopiedId] = useState(null);
@@ -411,13 +443,68 @@ Yoga Regime Team`;
     }
   };
 
-  // Filtered & Sorted Transactions
+  // Extract accurate millisecond timestamp from all possible date fields
+  const getTxTime = (tx) => {
+    if (!tx) return 0;
+    if (typeof tx.clientTimestamp === "number" && tx.clientTimestamp > 0) return tx.clientTimestamp;
+    if (tx.isoDate) {
+      const t = new Date(tx.isoDate).getTime();
+      if (!isNaN(t) && t > 0) return t;
+    }
+    if (tx.createTime) {
+      const t = new Date(tx.createTime).getTime();
+      if (!isNaN(t) && t > 0) return t;
+    }
+    if (tx.timestamp) {
+      const t = typeof tx.timestamp === "number" ? tx.timestamp : new Date(tx.timestamp).getTime();
+      if (!isNaN(t) && t > 0) return t;
+    }
+    // Fallback: extract millisecond timestamp if in paymentId or id
+    const match = String(tx.paymentId || tx.id || "").match(/\d{10,13}/);
+    if (match) {
+      const n = Number(match[0]);
+      if (n > 1000000000) return n < 10000000000 ? n * 1000 : n;
+    }
+    return 0;
+  };
+
+  // Check if a transaction is from a previous workshop or manually hidden
+  const isOldTx = (tx) => {
+    if (!tx) return false;
+    const id = tx.id || tx.paymentId;
+    if (hiddenTxIds.includes(id)) return true;
+
+    // Check if workshop name is from previous webinar or non-BREATHWISE
+    const ws = String(tx.workshop || tx.workshopSubtitle || "").toUpperCase();
+    if (ws && !ws.includes("BREATHWISE")) return true;
+
+    // Check if date mentions old session date (e.g. 31st Oct)
+    const dateStr = String(tx.workshopDate || tx.dateString || "").toLowerCase();
+    if (dateStr.includes("31st") || dateStr.includes("october")) return true;
+
+    // Subtitle legacy check
+    if (String(tx.workshopSubtitle || "").toLowerCase().includes("art of breathing")) return true;
+
+    return false;
+  };
+
+  // Total count of old / hidden entries
+  const totalOldCount = useMemo(() => {
+    return transactions.filter(isOldTx).length;
+  }, [transactions, hiddenTxIds]);
+
+  // Filtered & Sorted Transactions (Newest always at top by default)
   const filteredTransactions = useMemo(() => {
     const todayIST = getISTDateStr(Date.now());
     const sevenDaysAgoMs = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
     return transactions
       .filter((tx) => {
+        // Option to hide old entries
+        if (hideOldEntries && isOldTx(tx)) {
+          return false;
+        }
+
         // Search query matching
         const q = searchQuery.toLowerCase().trim();
         const matchesSearch =
@@ -435,7 +522,7 @@ Yoga Regime Team`;
         if (dateFilter === "all") return true;
 
         const txISTDate = getISTDateStr(tx.isoDate || tx.clientTimestamp);
-        const txTimestamp = tx.clientTimestamp || (tx.isoDate ? new Date(tx.isoDate).getTime() : 0);
+        const txTimestamp = getTxTime(tx);
 
         if (dateFilter === "today") {
           return txISTDate === todayIST;
@@ -452,11 +539,11 @@ Yoga Regime Team`;
         return true;
       })
       .sort((a, b) => {
-        const timeA = a.clientTimestamp || (a.isoDate ? new Date(a.isoDate).getTime() : 0);
-        const timeB = b.clientTimestamp || (b.isoDate ? new Date(b.isoDate).getTime() : 0);
+        const timeA = getTxTime(a);
+        const timeB = getTxTime(b);
         return sortOrder === "desc" ? timeB - timeA : timeA - timeB;
       });
-  }, [transactions, searchQuery, dateFilter, customDate, sortOrder]);
+  }, [transactions, searchQuery, dateFilter, customDate, sortOrder, hideOldEntries, hiddenTxIds]);
 
   // Summary Metrics
   const metrics = useMemo(() => {
@@ -1051,6 +1138,29 @@ Yoga Regime Team`;
               <span>{sortOrder === "desc" ? "Newest" : "Oldest"}</span>
             </button>
 
+            {/* Toggle Hide Old Entries */}
+            <button
+              onClick={() => setHideOldEntries(!hideOldEntries)}
+              className={`inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl border text-xs font-semibold transition-colors cursor-pointer ${
+                hideOldEntries
+                  ? "bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100 shadow-xs"
+                  : "bg-wellness-surface/60 border-wellness-border text-wellness-dark hover:bg-wellness-border/50"
+              }`}
+              title={hideOldEntries ? "Showing newest program registrations (Click to show all entries)" : "Hide older workshop entries"}
+            >
+              {hideOldEntries ? (
+                <>
+                  <EyeOff className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Old Hidden ({totalOldCount})</span>
+                </>
+              ) : (
+                <>
+                  <Eye className="w-3.5 h-3.5 text-wellness-primary" />
+                  <span>Showing All</span>
+                </>
+              )}
+            </button>
+
             {/* CSV Export Button */}
             <button
               onClick={handleExportCSV}
@@ -1077,6 +1187,36 @@ Yoga Regime Team`;
               {transactions.length}
             </span>
           </div>
+
+          {/* Information banner when old entries are hidden */}
+          {hideOldEntries && totalOldCount > 0 && (
+            <div className="bg-amber-50/90 border-b border-amber-200/80 px-3.5 sm:px-6 py-2.5 text-xs flex flex-wrap items-center justify-between gap-2 text-amber-900">
+              <div className="flex items-center gap-2">
+                <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                <span>
+                  <strong>{totalOldCount}</strong> older / prior-workshop entries are hidden to keep new registrations top & center.
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setHideOldEntries(false)}
+                  className="font-bold underline hover:text-amber-950 text-amber-800 text-xs cursor-pointer"
+                >
+                  Show All ({transactions.length})
+                </button>
+                {hiddenTxIds.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleUnhideAll}
+                    className="text-[11px] text-amber-700 hover:underline cursor-pointer"
+                  >
+                    Reset hidden items
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
 
           {dataLoading ? (
             <div className="p-10 text-center space-y-3">
@@ -1116,6 +1256,9 @@ Yoga Regime Team`;
                 {filteredTransactions.map((tx, idx) => {
                   const attendeeNumber = (tx.whatsappNumber || tx.phone || "").replace(/\D/g, "");
                   const isSendingThis = sendingEmailId === (tx.id || tx.paymentId);
+                  const txTime = getTxTime(tx);
+                  const isNew = txTime > 0 && (Date.now() - txTime) < 24 * 60 * 60 * 1000;
+                  const isOld = isOldTx(tx);
 
                   return (
                     <div
@@ -1125,13 +1268,18 @@ Yoga Regime Team`;
                       {/* Top Row: Attendee Name + Status Badge */}
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0">
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-1.5 flex-wrap">
                             <span className="text-[10px] font-mono font-bold text-wellness-muted">
                               #{idx + 1}
                             </span>
                             <h3 className="font-bold text-wellness-dark text-sm truncate">
                               {tx.fullName || "N/A"}
                             </h3>
+                            {isNew && (
+                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-red-100 text-red-700 border border-red-300 uppercase tracking-wider animate-pulse">
+                                <Sparkles className="w-2.5 h-2.5 text-red-600" /> NEW
+                              </span>
+                            )}
                           </div>
                           <p className="text-[11px] text-wellness-muted truncate break-all">
                             {tx.email || "No email"}
@@ -1209,9 +1357,23 @@ Yoga Regime Team`;
 
                         <button
                           onClick={() => setSelectedTx(tx)}
-                          className="px-3.5 py-2 rounded-xl bg-wellness-surface hover:bg-wellness-border/50 text-wellness-dark border border-wellness-border text-xs font-semibold transition-colors cursor-pointer"
+                          className="px-3 py-2 rounded-xl bg-wellness-surface hover:bg-wellness-border/50 text-wellness-dark border border-wellness-border text-xs font-semibold transition-colors cursor-pointer"
                         >
                           Details
+                        </button>
+
+                        {/* Hide / Unhide Specific Entry */}
+                        <button
+                          type="button"
+                          onClick={() => toggleHideTx(tx.id || tx.paymentId)}
+                          className={`p-2 rounded-xl border text-xs transition-colors cursor-pointer ${
+                            isOld
+                              ? "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-300"
+                              : "bg-wellness-surface hover:bg-wellness-border/50 text-wellness-muted hover:text-wellness-dark border-wellness-border"
+                          }`}
+                          title={isOld ? "Unhide this entry (show in active list)" : "Hide this entry"}
+                        >
+                          {isOld ? <Eye className="w-3.5 h-3.5 text-amber-700" /> : <EyeOff className="w-3.5 h-3.5" />}
                         </button>
 
                         <button
@@ -1246,6 +1408,9 @@ Yoga Regime Team`;
                     {filteredTransactions.map((tx, idx) => {
                       const attendeeNumber = (tx.whatsappNumber || tx.phone || "").replace(/\D/g, "");
                       const isSendingThis = sendingEmailId === (tx.id || tx.paymentId);
+                      const txTime = getTxTime(tx);
+                      const isNew = txTime > 0 && (Date.now() - txTime) < 24 * 60 * 60 * 1000;
+                      const isOld = isOldTx(tx);
 
                       return (
                         <tr
@@ -1264,8 +1429,15 @@ Yoga Regime Team`;
                             </div>
                           </td>
                           <td className="py-3.5 px-4">
-                            <div className="font-bold text-wellness-dark">
-                              {tx.fullName || "N/A"}
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <div className="font-bold text-wellness-dark">
+                                {tx.fullName || "N/A"}
+                              </div>
+                              {isNew && (
+                                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-red-100 text-red-700 border border-red-300 uppercase tracking-wider animate-pulse">
+                                  <Sparkles className="w-2.5 h-2.5 text-red-600" /> NEW
+                                </span>
+                              )}
                             </div>
                             <div className="text-[11px] text-wellness-muted break-all">
                               {tx.email || "N/A"}
@@ -1331,6 +1503,20 @@ Yoga Regime Team`;
                                 className="px-2.5 py-1.5 rounded-lg bg-wellness-surface hover:bg-wellness-border/60 text-wellness-dark border border-wellness-border text-[11px] font-semibold transition-colors cursor-pointer"
                               >
                                 Details
+                              </button>
+
+                              {/* Hide / Unhide Specific Entry */}
+                              <button
+                                type="button"
+                                onClick={() => toggleHideTx(tx.id || tx.paymentId)}
+                                className={`p-1.5 rounded-lg border text-xs transition-colors cursor-pointer ${
+                                  isOld
+                                    ? "bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-300"
+                                    : "bg-wellness-surface hover:bg-wellness-border/60 text-wellness-muted hover:text-wellness-dark border-wellness-border"
+                                }`}
+                                title={isOld ? "Unhide this entry (show in active list)" : "Hide this entry"}
+                              >
+                                {isOld ? <Eye className="w-3.5 h-3.5 text-amber-700" /> : <EyeOff className="w-3.5 h-3.5" />}
                               </button>
 
                               {/* Delete Option */}
