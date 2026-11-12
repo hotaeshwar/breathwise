@@ -54,7 +54,7 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
       orderId: orderRef,
       amountPaid: amountDisplay,
       workshop: "BREATHWISE - 1-Month Breathing & Pranayama Program",
-      date: "Starting 2 November (Mon, Wed, Fri)",
+      date: "Starting 16 November (Mon, Wed, Fri)",
       time: "6:30 PM - 7:30 PM IST",
       savedAt: new Date().toISOString(),
       status: "PAID & ENROLLED",
@@ -129,7 +129,7 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
 
     doc.setFontSize(8.5);
     doc.setTextColor(200, 220, 210);
-    doc.text("Starting 2 Nov • Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Online Classes)", 52, 38);
+    doc.text("Starting 16 Nov • Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Online Classes)", 52, 38);
 
     // Verified Stamp / Badge in top right
     doc.setFillColor(34, 139, 34);
@@ -208,7 +208,7 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setFont("helvetica", "bold");
     doc.text("Schedule:", cardX + 8, cardY + 68);
     doc.setFont("helvetica", "normal");
-    doc.text("Starting 2 Nov • Mon, Wed, Fri (6:30 PM – 7:30 PM IST)", cardX + 45, cardY + 68);
+    doc.text("Starting 16 Nov • Mon, Wed, Fri (6:30 PM – 7:30 PM IST)", cardX + 45, cardY + 68);
 
     doc.setFont("helvetica", "bold");
     doc.text("Format:", cardX + 8, cardY + 76);
@@ -269,7 +269,7 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setFont("helvetica", "normal");
 
     const guidelines = [
-      "1. Live class joining link & community access will be sent to your registered Email & WhatsApp before 2 November.",
+      "1. Live class joining link & community access will be sent to your registered Email & WhatsApp before 16 November.",
       "2. Attend classes on an empty stomach (or at least 2 hours after a light meal) for optimal pranayama practice.",
       "3. Wear comfortable yoga attire and keep a yoga mat, cushion, and hydration ready.",
       "4. \"Breathe with Awareness. Practise with Purpose.\" • Support: support@yogaregime.com • +91 98769 63204",

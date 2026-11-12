@@ -5,7 +5,7 @@ export const metadata = {
   metadataBase: new URL("https://breathwise.yogaregime.com"),
   title: "BREATHWISE — 1-Month Breathing & Pranayama Program | Yoga Regime",
   description:
-    "Understand Your Breath. Transform Your Practice. Join 12 live guided classes starting 2 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
+    "Understand Your Breath. Transform Your Practice. Join 12 live guided classes starting 16 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
   keywords: [
     "Breathwise",
     "Yoga Regime",
@@ -32,7 +32,7 @@ export const metadata = {
   openGraph: {
     title: "BREATHWISE — 1-Month Breathing & Pranayama Program",
     description:
-      "Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 2 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
+      "Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 16 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
     url: "https://breathwise.yogaregime.com",
     siteName: "Yoga Regime",
     images: [
@@ -51,7 +51,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "BREATHWISE — 1-Month Breathing & Pranayama Program",
     description:
-      "Understand Your Breath. Transform Your Practice. Starting 2 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500.",
+      "Understand Your Breath. Transform Your Practice. Starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500.",
     images: ["https://breathwise.yogaregime.com/og-image.jpg"],
     creator: "@yogaregime",
   },
@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
         <meta property="og:title" content="BREATHWISE — 1-Month Breathing & Pranayama Program" />
         <meta
           property="og:description"
-          content="Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 2 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
+          content="Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
         />
         <meta property="og:image" content="https://breathwise.yogaregime.com/og-image.jpg" />
         <meta property="og:image:secure_url" content="https://breathwise.yogaregime.com/og-image.jpg" />
@@ -83,7 +83,7 @@ export default function RootLayout({ children }) {
         <meta name="twitter:title" content="BREATHWISE — 1-Month Breathing & Pranayama Program" />
         <meta
           name="twitter:description"
-          content="Understand Your Breath. Transform Your Practice. Starting 2 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
+          content="Understand Your Breath. Transform Your Practice. Starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
         />
         <meta name="twitter:image" content="https://breathwise.yogaregime.com/og-image.jpg" />
 

@@ -70,7 +70,7 @@ export default function WorkshopDetails() {
         </p>
       </div>
 
-      {/* Details Grid (Starting 2 Nov • Mon/Wed/Fri • 6:30 PM - 7:30 PM • Online Classes) */}
+      {/* Details Grid (Starting 16 Nov • Mon/Wed/Fri • 6:30 PM - 7:30 PM • Online Classes) */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-3.5 rounded-2xl bg-wellness-surface/80 border border-wellness-border flex flex-col justify-between hover:bg-wellness-surface transition-colors shadow-xs">
           <div className="flex items-center gap-2 text-wellness-primary mb-1.5">
@@ -80,7 +80,7 @@ export default function WorkshopDetails() {
             </span>
           </div>
           <span className="text-sm sm:text-base font-bold text-wellness-dark leading-tight">
-            2 November
+            16 November
           </span>
           <span className="text-[11px] text-wellness-muted font-medium mt-0.5">
             Mon • Wed • Fri

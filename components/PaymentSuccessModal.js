@@ -105,7 +105,7 @@ ATTENDEE DETAILS:
 
 PROGRAM DETAILS:
 - Program: BREATHWISE (1-Month Breathing & Pranayama Program)
-- Starting Date: 2 November
+- Starting Date: 16 November
 - Schedule: Monday • Wednesday • Friday (12 Live Guided Classes)
 - Class Time: 6:30 PM – 7:30 PM IST (Online Live Classes)
 - Tagline: Understand Your Breath. Transform Your Practice.
@@ -148,7 +148,7 @@ Helpline Support: support@yogaregime.com • +91 98769 63204`;
             Welcome to BREATHWISE!
           </h2>
           <p className="text-xs sm:text-sm text-gray-200 mt-1">
-            Starting 2 November • Mon • Wed • Fri (6:30 PM – 7:30 PM IST)
+            Starting 16 November • Mon • Wed • Fri (6:30 PM – 7:30 PM IST)
           </p>
 
           {/* 15-Second Timer Countdown Badge */}
@@ -212,7 +212,7 @@ Helpline Support: support@yogaregime.com • +91 98769 63204`;
             <div className="flex justify-between items-center py-0.5 border-b border-wellness-border/50">
               <span className="text-wellness-muted font-medium">Schedule:</span>
               <span className="text-wellness-dark font-semibold text-right">
-                Starting 2 Nov • Mon, Wed, Fri (6:30 PM)
+                Starting 16 Nov • Mon, Wed, Fri (6:30 PM)
               </span>
             </div>
             <div className="flex justify-between items-center py-0.5 border-b border-wellness-border/50">

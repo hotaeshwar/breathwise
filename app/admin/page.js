@@ -380,7 +380,7 @@ export default function AdminPage() {
   // Helper to generate clean plain text Event & Transaction confirmation message
   const getAdminEmailMessage = (tx) => {
     if (!tx) return "";
-    const dateFormatted = tx.dateString || "Starting 2 November";
+    const dateFormatted = tx.dateString || "Starting 16 November";
     const timeFormatted = tx.timeString ? ` at ${tx.timeString}` : "";
     const amt = Number(tx.amount) > 0 ? Number(tx.amount) : 1500;
     
@@ -392,7 +392,7 @@ Your enrolment in BREATHWISE - 1-Month Breathing & Pranayama Program is confirme
 
 PROGRAM DETAILS:
 - Program: BREATHWISE (1-Month Breathing & Pranayama Program)
-- Starting Date: 2 November
+- Starting Date: 16 November
 - Schedule: Monday • Wednesday • Friday
 - Time: 6:30 PM – 7:30 PM IST (Online Classes)
 - Organizer Support: support@yogaregime.com • +91 98769 63204
@@ -414,7 +414,7 @@ SESSION GUIDELINES:
 2. Wear comfortable yoga attire and keep a yoga mat, cushion, and water ready.
 3. Join 5-10 minutes prior to 6:30 PM IST.
 
-The live class joining link will be shared to your registered email prior to 2 November.
+The live class joining link will be shared to your registered email prior to 16 November.
 
 "Breathe with Awareness. Practise with Purpose."
 
@@ -1070,7 +1070,7 @@ Yoga Regime Team`;
                 BREATHWISE (1-Month)
               </p>
               <h3 className="text-sm sm:text-base lg:text-lg font-bold font-serif mt-0.5 sm:mt-1 truncate">
-                Starts 2 November
+                Starts 16 November
               </h3>
               <p className="text-[10px] sm:text-[11px] text-gray-200 mt-0.5 flex items-center gap-1 truncate">
                 <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-wellness-goldLight shrink-0" />

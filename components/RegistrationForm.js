@@ -195,7 +195,7 @@ export default function RegistrationForm() {
         },
         notes: {
           program: "BREATHWISE",
-          startDate: "2 November",
+          startDate: "16 November",
           schedule: "Mon • Wed • Fri (6:30 PM - 7:30 PM IST)",
           offerPrice: "Rs. 1500 (Save Rs. 1000)",
         },
@@ -365,7 +365,7 @@ export default function RegistrationForm() {
             Enrol in BREATHWISE
           </h2>
           <p className="text-xs sm:text-sm text-wellness-muted">
-            1-Month Program • Starting 2 Nov (Mon, Wed, Fri • 6:30 PM IST)
+            1-Month Program • Starting 16 Nov (Mon, Wed, Fri • 6:30 PM IST)
           </p>
         </div>
 
@@ -568,7 +568,7 @@ export default function RegistrationForm() {
                 className="mt-1 w-4.5 h-4.5 rounded border-wellness-border text-wellness-primary focus:ring-wellness-primary/20 accent-wellness-primary cursor-pointer shrink-0"
               />
               <span className="text-xs text-wellness-muted leading-relaxed">
-                I understand classes start on <strong>2 November</strong> (Monday, Wednesday, Friday • 6:30 PM – 7:30 PM IST) and agree to enrol in the 1-Month BREATHWISE Program.
+                I understand classes start on <strong>16 November</strong> (Monday, Wednesday, Friday • 6:30 PM – 7:30 PM IST) and agree to enrol in the 1-Month BREATHWISE Program.
               </span>
             </label>
             {touched.termsAccepted && formErrors.termsAccepted && (

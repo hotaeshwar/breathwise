@@ -67,7 +67,7 @@ export default function Home() {
             &ldquo;Understand Your Breath. Transform Your Practice.&rdquo;
           </p>
           <p className="text-xs font-semibold text-wellness-dark pt-0.5">
-            Starting 2 November • Mon • Wed • Fri (6:30 PM – 7:30 PM IST)
+            Starting 16 November • Mon • Wed • Fri (6:30 PM – 7:30 PM IST)
           </p>
         </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
                   12 Live Guided Classes
                 </h4>
                 <p className="text-xs text-wellness-muted">
-                  Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Starting 2 Nov)
+                  Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Starting 16 Nov)
                 </p>
               </div>
             </div>
