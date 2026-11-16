@@ -3,22 +3,23 @@ import "./globals.css";
 
 export const metadata = {
   metadataBase: new URL("https://breathwise.yogaregime.com"),
-  title: "BREATHWISE — 1-Month Breathing & Pranayama Program | Yoga Regime",
+  title: "Sampoorna Yoga – A Complete Yogic Journey | Yoga Regime",
   description:
-    "Understand Your Breath. Transform Your Practice. Join 12 live guided classes starting 16 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
+    "Join our 1-Month Online Sampoorna Yoga Program with Harpreet Kaur. Mon, Wed & Fri (7:00 AM – 8:00 AM IST). Shatkarma, Asana, Pranayama, Mudra, Bandha & Meditation. Program Fee: ₹1,500.",
   keywords: [
-    "Breathwise",
+    "Sampoorna Yoga",
     "Yoga Regime",
-    "Pranayama Program",
-    "Breathing Workshop",
-    "Diaphragmatic Breathing",
-    "Complete Yogic Breathing",
-    "Pranayama Asanas",
-    "Breath Awareness",
-    "Mind-Body Coordination",
+    "Harpreet Kaur",
+    "Shatkarma",
+    "Asana",
+    "Pranayama",
+    "Mudra",
+    "Bandha",
+    "Meditation",
     "Online Yoga Classes",
+    "Yogic Journey",
   ],
-  authors: [{ name: "Yoga Regime", url: "https://breathwise.yogaregime.com" }],
+  authors: [{ name: "Harpreet Kaur • Yoga Regime", url: "https://breathwise.yogaregime.com" }],
   creator: "Yoga Regime",
   publisher: "Yoga Regime",
   alternates: {
@@ -30,9 +31,9 @@ export const metadata = {
     apple: "/logo1.png",
   },
   openGraph: {
-    title: "BREATHWISE — 1-Month Breathing & Pranayama Program",
+    title: "Sampoorna Yoga – A Complete Yogic Journey",
     description:
-      "Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 16 November (Mon, Wed, Fri • 6:30 PM – 7:30 PM IST). Special Webinar Offer: Rs. 1500/-.",
+      "A one-month online yoga program designed to help you explore yoga beyond physical postures. Mon, Wed & Fri (7:00 AM – 8:00 AM IST). Fee: ₹1,500.",
     url: "https://breathwise.yogaregime.com",
     siteName: "Yoga Regime",
     images: [
@@ -40,7 +41,7 @@ export const metadata = {
         url: "https://breathwise.yogaregime.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "BREATHWISE: 1-Month Breathing & Pranayama Program by Yoga Regime",
+        alt: "Sampoorna Yoga: A Complete Yogic Journey by Yoga Regime",
         type: "image/jpeg",
       },
     ],
@@ -49,9 +50,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BREATHWISE — 1-Month Breathing & Pranayama Program",
+    title: "Sampoorna Yoga – A Complete Yogic Journey",
     description:
-      "Understand Your Breath. Transform Your Practice. Starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500.",
+      "1-Month Online Yoga Program with Harpreet Kaur. Mon, Wed & Fri (7:00 AM – 8:00 AM IST). Program Fee: ₹1,500.",
     images: ["https://breathwise.yogaregime.com/og-image.jpg"],
     creator: "@yogaregime",
   },
@@ -62,17 +63,17 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <head>
         {/* WhatsApp & Open Graph Preview Meta Tags */}
-        <meta property="og:title" content="BREATHWISE — 1-Month Breathing & Pranayama Program" />
+        <meta property="og:title" content="Sampoorna Yoga – A Complete Yogic Journey" />
         <meta
           property="og:description"
-          content="Understand Your Breath. Transform Your Practice. 12 Live Guided Classes starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
+          content="A one-month online yoga program designed to help you explore yoga beyond physical postures. Mon, Wed & Fri (7:00 AM – 8:00 AM IST). Fee: ₹1,500."
         />
         <meta property="og:image" content="https://breathwise.yogaregime.com/og-image.jpg" />
         <meta property="og:image:secure_url" content="https://breathwise.yogaregime.com/og-image.jpg" />
         <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="BREATHWISE: 1-Month Breathing & Pranayama Program by Yoga Regime" />
+        <meta property="og:image:alt" content="Sampoorna Yoga: A Complete Yogic Journey by Yoga Regime" />
         <meta property="og:url" content="https://breathwise.yogaregime.com/" />
         <meta property="og:site_name" content="Yoga Regime" />
         <meta property="og:type" content="website" />
@@ -80,10 +81,10 @@ export default function RootLayout({ children }) {
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="BREATHWISE — 1-Month Breathing & Pranayama Program" />
+        <meta name="twitter:title" content="Sampoorna Yoga – A Complete Yogic Journey" />
         <meta
           name="twitter:description"
-          content="Understand Your Breath. Transform Your Practice. Starting 16 November • Mon, Wed, Fri (6:30 PM - 7:30 PM IST). Special Webinar Offer: Rs. 1500."
+          content="1-Month Online Yoga Program with Harpreet Kaur. Mon, Wed & Fri (7:00 AM – 8:00 AM IST). Program Fee: ₹1,500."
         />
         <meta name="twitter:image" content="https://breathwise.yogaregime.com/og-image.jpg" />
 

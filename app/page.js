@@ -1,7 +1,7 @@
 import React from "react";
 import WorkshopDetails from "@/components/WorkshopDetails";
 import RegistrationForm from "@/components/RegistrationForm";
-import { Sparkles, Shield, Heart, HelpCircle, PhoneCall, Mail, Wind, Calendar, CheckCircle } from "lucide-react";
+import { Sparkles, Shield, Heart, HelpCircle, PhoneCall, Mail, Wind, Calendar, CheckCircle, Video, Radio, Award } from "lucide-react";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
           <div className="flex items-center gap-3.5">
             <img
               src="/logo1.png"
-              alt="Yoga Regime Presents BREATHWISE"
+              alt="Yoga Regime Presents Sampoorna Yoga"
               className="h-12 sm:h-14 w-auto max-w-[160px] object-contain drop-shadow-sm transition-transform hover:scale-105"
             />
             <div>
@@ -26,7 +26,7 @@ export default function Home() {
                 Yoga Regime
               </span>
               <span className="text-xs text-wellness-goldDark font-semibold uppercase tracking-wider">
-                Presents BREATHWISE
+                Sampoorna Yoga
               </span>
             </div>
           </div>
@@ -55,19 +55,19 @@ export default function Home() {
         <div className="block lg:hidden mb-4 text-center space-y-1.5">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-wellness-gold/15 text-wellness-goldDark border border-wellness-gold/30">
             <Sparkles className="w-3 h-3 text-wellness-gold" />
-            ★ SPECIAL WEBINAR OFFER • SAVE Rs. 1000 ★
+            1-MONTH ONLINE YOGA PROGRAM
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-wellness-dark tracking-tight font-serif leading-tight uppercase">
-            BREATH<span className="text-wellness-primary italic">WISE</span>
+            SAMPOORNA <span className="text-wellness-primary italic">YOGA</span>
           </h1>
           <p className="text-sm font-bold text-wellness-goldDark">
-            1-Month Breathing &amp; Pranayama Program
+            A Complete Yogic Journey
           </p>
           <p className="text-xs text-wellness-muted font-medium italic">
-            &ldquo;Understand Your Breath. Transform Your Practice.&rdquo;
+            &ldquo;Where body, breath and mind work together.&rdquo;
           </p>
           <p className="text-xs font-semibold text-wellness-dark pt-0.5">
-            Starting 16 November • Mon • Wed • Fri (6:30 PM – 7:30 PM IST)
+            Mon • Wed • Fri (7:00 AM – 8:00 AM IST) • Fee: ₹1,500
           </p>
         </div>
 
@@ -94,10 +94,10 @@ export default function Home() {
               </div>
               <div>
                 <h4 className="text-xs font-bold text-wellness-dark uppercase tracking-wider">
-                  12 Live Guided Classes
+                  1-Month Online Journey
                 </h4>
                 <p className="text-xs text-wellness-muted">
-                  Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Starting 16 Nov)
+                  Mon, Wed &amp; Fri • 7:00 AM – 8:00 AM IST
                 </p>
               </div>
             </div>
@@ -108,24 +108,24 @@ export default function Home() {
               </div>
               <div>
                 <h4 className="text-xs font-bold text-wellness-dark uppercase tracking-wider">
-                  Complete Yogic Breathing
+                  6 Yogic Dimensions
                 </h4>
                 <p className="text-xs text-wellness-muted">
-                  Diaphragmatic control, pranayama asanas &amp; mind coordination
+                  Shatkarma, Asana, Pranayama, Mudra, Bandha &amp; Meditation
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 justify-center sm:justify-start">
               <div className="w-10 h-10 rounded-xl bg-white border border-wellness-border flex items-center justify-center text-wellness-primary shrink-0 shadow-sm">
-                <Mail className="w-5 h-5 text-wellness-primary" />
+                <Radio className="w-5 h-5 text-wellness-primary" />
               </div>
               <div>
                 <h4 className="text-xs font-bold text-wellness-dark uppercase tracking-wider">
-                  Instant Enrolment Pass
+                  Recording Available
                 </h4>
                 <p className="text-xs text-wellness-muted">
-                  Razorpay verified receipt &amp; pass sent directly to email
+                  Recordings available for self practice throughout the month
                 </p>
               </div>
             </div>
@@ -142,14 +142,9 @@ export default function Home() {
               alt="Yoga Regime Logo"
               className="h-9 w-auto object-contain"
             />
-            <p>© {new Date().getFullYear()} Yoga Regime • BREATHWISE 1-Month Program. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Yoga Regime • Sampoorna Yoga – A Complete Yogic Journey. All rights reserved.</p>
           </div>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1">
-              <Mail className="w-3.5 h-3.5 text-wellness-primary" />
-              support@yogaregime.com
-            </span>
-            <span className="text-wellness-border">•</span>
             <a
               href="/admin"
               className="text-wellness-muted/80 hover:text-wellness-primary font-medium transition-colors"

@@ -13,6 +13,7 @@ import {
   AlertCircle,
   Sparkles,
   CreditCard,
+  Radio,
 } from "lucide-react";
 import PaymentProgress from "./PaymentProgress";
 import PaymentSuccessModal from "./PaymentSuccessModal";
@@ -21,14 +22,14 @@ import { saveTransaction } from "@/lib/transactionService";
 import { sendRegistrationEmail } from "@/lib/emailService";
 
 const COUNTRY_CODES = [
-  { code: "+91", country: "India (IN)", flag: "🇮🇳", digits: 10 },
-  { code: "+1", country: "USA / Canada (US/CA)", flag: "🇺🇸", digits: 10 },
-  { code: "+44", country: "United Kingdom (UK)", flag: "🇬🇧", digits: 10 },
-  { code: "+971", country: "UAE (AE)", flag: "🇦🇪", digits: 9 },
-  { code: "+65", country: "Singapore (SG)", flag: "🇸🇬", digits: 8 },
-  { code: "+61", country: "Australia (AU)", flag: "🇦🇺", digits: 9 },
-  { code: "+49", country: "Germany (DE)", flag: "🇩🇪", digits: 10 },
-  { code: "+33", country: "France (FR)", flag: "🇫🇷", digits: 9 },
+  { code: "+91", country: "India (IN)", digits: 10 },
+  { code: "+1", country: "USA / Canada (US/CA)", digits: 10 },
+  { code: "+44", country: "United Kingdom (UK)", digits: 10 },
+  { code: "+971", country: "UAE (AE)", digits: 9 },
+  { code: "+65", country: "Singapore (SG)", digits: 8 },
+  { code: "+61", country: "Australia (AU)", digits: 9 },
+  { code: "+49", country: "Germany (DE)", digits: 10 },
+  { code: "+33", country: "France (FR)", digits: 9 },
 ];
 
 /**
@@ -186,7 +187,7 @@ export default function RegistrationForm() {
         amount: amountInPaise,
         currency: "INR",
         name: "Yoga Regime",
-        description: "BREATHWISE: 1-Month Breathing & Pranayama Program",
+        description: "Sampoorna Yoga – A Complete Yogic Journey",
         image: "/logo1.png",
         prefill: {
           name: formData.fullName.trim(),
@@ -194,10 +195,10 @@ export default function RegistrationForm() {
           contact: cleanPhone,
         },
         notes: {
-          program: "BREATHWISE",
-          startDate: "16 November",
-          schedule: "Mon • Wed • Fri (6:30 PM - 7:30 PM IST)",
-          offerPrice: "Rs. 1500 (Save Rs. 1000)",
+          program: "Sampoorna Yoga – A Complete Yogic Journey",
+          mentor: "Harpreet Kaur",
+          schedule: "Mon, Wed & Fri (7:00 AM – 8:00 AM IST)",
+          programFee: "Rs. 1500",
         },
         theme: {
           color: "#1A4D3E",
@@ -247,7 +248,7 @@ export default function RegistrationForm() {
             setPaymentStage(4);
             setVerifiedPaymentData(paymentPayload);
             setRegistrationStatus("success");
-            showToast("Enrolment Confirmed! Welcome to BREATHWISE ✓", "success");
+            showToast("Enrolment Confirmed! Welcome to Sampoorna Yoga", "success");
           } catch (postPayErr) {
             console.error("Post payment handler error:", postPayErr);
             // Still display success modal since user was charged
@@ -311,7 +312,7 @@ export default function RegistrationForm() {
         return (
           <>
             <CheckCircle2 className="w-5 h-5 text-emerald-300" />
-            <span>Enrolment Confirmed ✓</span>
+            <span>Enrolment Confirmed</span>
           </>
         );
       case "failed":
@@ -359,13 +360,13 @@ export default function RegistrationForm() {
         <div className="mb-5 space-y-1 relative">
           <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-wellness-goldDark bg-wellness-gold/15 px-3 py-1 rounded-full border border-wellness-gold/30 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-wellness-gold" />
-            Save Rs. 1000 • Webinar Special Offer
+            Sampoorna Yoga Journey
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-wellness-dark font-serif">
-            Enrol in BREATHWISE
+            Enrol in Sampoorna Yoga
           </h2>
           <p className="text-xs sm:text-sm text-wellness-muted">
-            1-Month Program • Starting 16 Nov (Mon, Wed, Fri • 6:30 PM IST)
+            1-Month Online Yoga Program • Mon, Wed, Fri (7:00 AM – 8:00 AM IST)
           </p>
         </div>
 
@@ -377,21 +378,24 @@ export default function RegistrationForm() {
             </span>
             <div className="flex items-baseline gap-2">
               <span className="text-xl sm:text-2xl font-black text-wellness-primary font-mono">
-                Rs. 1500/-
-              </span>
-              <span className="text-xs line-through text-gray-400 font-semibold">
-                Rs. 2500/-
+                ₹1,500
               </span>
             </div>
           </div>
           <div className="text-right">
             <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-extrabold uppercase tracking-wide border border-emerald-300">
-              Save Rs. 1000!
+              1 Month Journey
             </span>
             <span className="block text-[10px] text-wellness-muted font-medium mt-0.5">
-              12 Live Classes
+              Live + Recordings Included
             </span>
           </div>
+        </div>
+
+        {/* Recording Available Badge */}
+        <div className="mb-4 px-3 py-2 rounded-xl bg-wellness-emeraldBg/70 border border-wellness-primary/20 flex items-center gap-2 text-xs font-medium text-wellness-primary">
+          <Radio className="w-3.5 h-3.5 text-wellness-primary animate-pulse shrink-0" />
+          <span>Recording available for self practice throughout the program.</span>
         </div>
 
         {/* Payment Progress Bar (active when checking out) */}
@@ -494,7 +498,7 @@ export default function RegistrationForm() {
                 >
                   {COUNTRY_CODES.map((c) => (
                     <option key={c.code} value={c.code}>
-                      {c.flag} {c.code}
+                      {c.code}
                     </option>
                   ))}
                 </select>
@@ -568,7 +572,7 @@ export default function RegistrationForm() {
                 className="mt-1 w-4.5 h-4.5 rounded border-wellness-border text-wellness-primary focus:ring-wellness-primary/20 accent-wellness-primary cursor-pointer shrink-0"
               />
               <span className="text-xs text-wellness-muted leading-relaxed">
-                I understand classes start on <strong>16 November</strong> (Monday, Wednesday, Friday • 6:30 PM – 7:30 PM IST) and agree to enrol in the 1-Month BREATHWISE Program.
+                I agree to enrol in the 1-Month <strong>Sampoorna Yoga Program</strong> (Monday, Wednesday &amp; Friday • 7:00 AM – 8:00 AM IST) and confirm the payment of ₹1,500.
               </span>
             </label>
             {touched.termsAccepted && formErrors.termsAccepted && (
@@ -597,7 +601,7 @@ export default function RegistrationForm() {
             <div className="space-y-1.5 text-center">
               <div className="flex items-center justify-center gap-1.5 text-xs text-wellness-muted font-medium">
                 <CheckCircle2 className="w-3.5 h-3.5 text-wellness-primary" />
-                <span>Instant payment receipt &amp; program pass emailed automatically.</span>
+                <span>Instant payment receipt &amp; admission pass emailed automatically.</span>
               </div>
               <div className="flex items-center justify-center gap-1 text-[11px] text-wellness-muted/80">
                 <Lock className="w-3.5 h-3.5 text-wellness-primary" />

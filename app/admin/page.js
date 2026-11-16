@@ -380,45 +380,45 @@ export default function AdminPage() {
   // Helper to generate clean plain text Event & Transaction confirmation message
   const getAdminEmailMessage = (tx) => {
     if (!tx) return "";
-    const dateFormatted = tx.dateString || "Starting 16 November";
+    const dateFormatted = tx.dateString || "Monday, Wednesday & Friday";
     const timeFormatted = tx.timeString ? ` at ${tx.timeString}` : "";
     const amt = Number(tx.amount) > 0 ? Number(tx.amount) : 1500;
     
-    return `BREATHWISE - 1-MONTH BREATHING & PRANAYAMA PROGRAM
-YOGA REGIME PRESENTS • ADMISSION PASS
+    return `SAMPOORNA YOGA – A COMPLETE YOGIC JOURNEY
+YOGA REGIME • OFFICIAL ENROLMENT RECEIPT
 
-Hello ${tx.fullName || "Attendee"},
-Your enrolment in BREATHWISE - 1-Month Breathing & Pranayama Program is confirmed. Below are your program admission and transaction details:
+Dear ${tx.fullName || "Attendee"},
+
+Wonderful! Happy to have you join us on this journey of Sampoorna Yoga.
+
+Your enrollment payment of ₹${amt} is confirmed!
+
+Once the payment is done, kindly share the screenshot on WhatsApp (+91 98769 63204) so I can confirm your registration.
+
+After confirmation, you’ll receive the Zoom meeting details and further instructions to prepare for the sessions.
 
 PROGRAM DETAILS:
-- Program: BREATHWISE (1-Month Breathing & Pranayama Program)
-- Starting Date: 16 November
-- Schedule: Monday • Wednesday • Friday
-- Time: 6:30 PM – 7:30 PM IST (Online Classes)
-- Organizer Support: support@yogaregime.com • +91 98769 63204
+- Program: Sampoorna Yoga – A Complete Yogic Journey
+- Duration: 1 Month
+- Days: Monday, Wednesday & Friday
+- Timing: 7:00 AM – 8:00 AM IST
+- Mode: Online classes (Zoom)
+- Program Fee: ₹${amt}
+- Recording: Available for self practice
 
 ATTENDEE DETAILS:
 - Name: ${tx.fullName || "N/A"}
 - Email: ${tx.email || "N/A"}
 - Contact: ${tx.countryCode || "+91"} ${tx.whatsappNumber || tx.phone || "N/A"}
-
-ENROLMENT AND TRANSACTION DETAILS:
-- Fee Paid: Rs. ${amt} INR (Webinar Special Offer)
-- Status: Confirmed & Enrolled (${tx.status || "CONFIRMED"})
 - Payment ID: ${tx.registrationId || tx.paymentId || "N/A"}
 - Order Reference: ${tx.orderId || "N/A"}
-- Enrolment Date: ${dateFormatted}${timeFormatted}
+- Status: ${tx.status || "CONFIRMED"}
 
-SESSION GUIDELINES:
-1. Practice on an empty stomach or at least 2 hours after a light meal.
-2. Wear comfortable yoga attire and keep a yoga mat, cushion, and water ready.
-3. Join 5-10 minutes prior to 6:30 PM IST.
+Looking forward to practising and learning together!
 
-The live class joining link will be shared to your registered email prior to 16 November.
-
-"Breathe with Awareness. Practise with Purpose."
-
-Yoga Regime Team`;
+Regards,
+Harpreet Kaur
+Yoga Regime`;
   };
 
   // Copy helper
@@ -474,11 +474,7 @@ Yoga Regime Team`;
     const id = tx.id || tx.paymentId;
     if (hiddenTxIds.includes(id)) return true;
 
-    // Check if workshop name is from previous webinar or non-BREATHWISE
-    const ws = String(tx.workshop || tx.workshopSubtitle || "").toUpperCase();
-    if (ws && !ws.includes("BREATHWISE")) return true;
-
-    // Check if date mentions old session date (e.g. 31st Oct)
+    // Check if date mentions old session date (e.g. 31st Oct, 16 Nov) or previous webinars
     const dateStr = String(tx.workshopDate || tx.dateString || "").toLowerCase();
     if (dateStr.includes("31st") || dateStr.includes("october")) return true;
 
@@ -621,7 +617,7 @@ Yoga Regime Team`;
         escapeCSV(tx.email || "N/A"),
         formatAsTextCell(tx.countryCode || "+91"),
         formatAsTextCell(tx.whatsappNumber || ""),
-        escapeCSV(tx.workshop || "BREATHWISE (1-Month Breathing & Pranayama Program)"),
+        escapeCSV(tx.workshop || "Sampoorna Yoga – A Complete Yogic Journey"),
         Number(tx.amount) > 0 ? (Number(tx.amount) >= 10000 ? Math.round(Number(tx.amount) / 100) : Number(tx.amount)) : 1500,
         formatAsTextCell(tx.paymentId || ""),
         formatAsTextCell(tx.orderId || ""),
@@ -677,7 +673,7 @@ Yoga Regime Team`;
             </div>
             <h1 className="text-2xl font-bold font-serif">Admin Portal</h1>
             <p className="text-xs text-gray-200 mt-1">
-              BREATHWISE (1-Month Program) Dashboard
+              Sampoorna Yoga (1-Month Program) Dashboard
             </p>
             <div className="mt-2.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-950/40 text-[10px] text-emerald-200 border border-emerald-400/30">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -1037,7 +1033,7 @@ Yoga Regime Team`;
                 {`₹${metrics.totalRevenue.toLocaleString("en-IN")}`}
               </h3>
               <p className="text-[10px] sm:text-[11px] text-emerald-600 font-semibold mt-0.5 sm:mt-1 truncate">
-                ₹1,500 Special Offer per enrolment
+                ₹1,500 Program Fee per enrolment
               </p>
             </div>
             <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-700 shrink-0">
@@ -1067,14 +1063,14 @@ Yoga Regime Team`;
           <div className="bg-gradient-to-br from-wellness-dark via-wellness-primaryDark to-wellness-primary p-3.5 sm:p-5 rounded-2xl text-white shadow-xs flex items-center justify-between">
             <div className="min-w-0">
               <p className="text-[10px] sm:text-xs font-bold text-wellness-goldLight uppercase tracking-wider truncate">
-                BREATHWISE (1-Month)
+                Sampoorna Yoga (1-Month)
               </p>
               <h3 className="text-sm sm:text-base lg:text-lg font-bold font-serif mt-0.5 sm:mt-1 truncate">
-                Starts 16 November
+                Mon, Wed &amp; Fri
               </h3>
               <p className="text-[10px] sm:text-[11px] text-gray-200 mt-0.5 flex items-center gap-1 truncate">
                 <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-wellness-goldLight shrink-0" />
-                <span>Mon • Wed • Fri (6:30 PM)</span>
+                <span>7:00 AM – 8:00 AM IST</span>
               </p>
             </div>
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-wellness-goldLight shrink-0">
@@ -1567,6 +1563,10 @@ Yoga Regime Team`;
             {/* Modal Body (Scrollable on small screens) */}
             <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4 text-xs sm:text-sm overflow-y-auto flex-1">
               <div className="bg-wellness-surface/75 rounded-2xl p-3.5 sm:p-4 border border-wellness-border space-y-2">
+                <div className="flex justify-between py-1 border-b border-wellness-border/50">
+                  <span className="text-wellness-muted font-medium">Program:</span>
+                  <span className="text-wellness-dark font-bold text-right">{selectedTx.workshop || "Sampoorna Yoga"}</span>
+                </div>
                 <div className="flex justify-between py-1 border-b border-wellness-border/50">
                   <span className="text-wellness-muted font-medium">Attendee:</span>
                   <span className="text-wellness-dark font-bold text-right">{selectedTx.fullName}</span>

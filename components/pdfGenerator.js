@@ -53,9 +53,9 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
       paymentId: regId,
       orderId: orderRef,
       amountPaid: amountDisplay,
-      workshop: "BREATHWISE - 1-Month Breathing & Pranayama Program",
-      date: "Starting 16 November (Mon, Wed, Fri)",
-      time: "6:30 PM - 7:30 PM IST",
+      workshop: "Sampoorna Yoga – A Complete Yogic Journey",
+      date: "Monday, Wednesday & Friday",
+      time: "7:00 AM – 8:00 AM IST",
       savedAt: new Date().toISOString(),
       status: "PAID & ENROLLED",
     };
@@ -119,17 +119,17 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.text("YOGA REGIME PRESENTS", 52, 16);
 
     doc.setTextColor(255, 255, 255);
-    doc.setFontSize(18);
-    doc.text("BREATHWISE", 52, 24);
+    doc.setFontSize(17);
+    doc.text("SAMPOORNA YOGA", 52, 24);
 
-    doc.setFontSize(10.5);
+    doc.setFontSize(10);
     doc.setFont("helvetica", "normal");
     doc.setTextColor(243, 230, 186); // Light Gold
-    doc.text("1-Month Breathing & Pranayama Program • Official Admission Pass", 52, 31);
+    doc.text("A Complete Yogic Journey • Official Admission Pass", 52, 31);
 
     doc.setFontSize(8.5);
     doc.setTextColor(200, 220, 210);
-    doc.text("Starting 16 Nov • Mon, Wed, Fri • 6:30 PM – 7:30 PM IST (Online Classes)", 52, 38);
+    doc.text("Mon, Wed & Fri • 7:00 AM – 8:00 AM IST (Online Classes on Zoom)", 52, 38);
 
     // Verified Stamp / Badge in top right
     doc.setFillColor(34, 139, 34);
@@ -203,17 +203,17 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setFont("helvetica", "bold");
     doc.text("Program:", cardX + 8, cardY + 60);
     doc.setFont("helvetica", "normal");
-    doc.text("BREATHWISE (1-Month Breathing & Pranayama Program)", cardX + 45, cardY + 60);
+    doc.text("Sampoorna Yoga – A Complete Yogic Journey (1 Month)", cardX + 45, cardY + 60);
 
     doc.setFont("helvetica", "bold");
     doc.text("Schedule:", cardX + 8, cardY + 68);
     doc.setFont("helvetica", "normal");
-    doc.text("Starting 16 Nov • Mon, Wed, Fri (6:30 PM – 7:30 PM IST)", cardX + 45, cardY + 68);
+    doc.text("Monday, Wednesday & Friday • 7:00 AM – 8:00 AM IST", cardX + 45, cardY + 68);
 
     doc.setFont("helvetica", "bold");
-    doc.text("Format:", cardX + 8, cardY + 76);
+    doc.text("Mode:", cardX + 8, cardY + 76);
     doc.setFont("helvetica", "normal");
-    doc.text("Online Classes (12 Live Interactive Sessions)", cardX + 45, cardY + 76);
+    doc.text("Online Classes (Zoom) • Recording Available for Practice", cardX + 45, cardY + 76);
 
     // Column Right / Payment Info Box
     const payBoxX = cardX + 8;
@@ -227,10 +227,10 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
 
     doc.setFont("helvetica", "bold");
     doc.setTextColor(...primaryDark);
-    doc.text("Fee Paid:", payBoxX + 6, payBoxY + 10);
+    doc.text("Program Fee:", payBoxX + 6, payBoxY + 10);
     doc.setFontSize(12);
     doc.setTextColor(...goldAccent);
-    doc.text(`${amountDisplay} (Webinar Special Offer)`, payBoxX + 50, payBoxY + 10);
+    doc.text(`${amountDisplay}`, payBoxX + 50, payBoxY + 10);
 
     doc.setFontSize(9.5);
     doc.setTextColor(...textDark);
@@ -247,7 +247,7 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setFont("helvetica", "bold");
     doc.text("Status:", payBoxX + 6, payBoxY + 35);
     doc.setTextColor(34, 139, 34);
-    doc.text("PAID & ENROLLED ✓", payBoxX + 50, payBoxY + 35);
+    doc.text("PAID & ENROLLED", payBoxX + 50, payBoxY + 35);
 
     // Section 3: Preparation & Guidelines Box
     const noteY = cardY + cardHeight + 8;
@@ -262,17 +262,17 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(8.5);
     doc.setFont("helvetica", "bold");
-    doc.text("BREATHWISE PROGRAM GUIDELINES", cardX + 6, noteY + 4.5);
+    doc.text("SAMPOORNA YOGA PROGRAM INSTRUCTIONS", cardX + 6, noteY + 4.5);
 
     doc.setTextColor(...textDark);
     doc.setFontSize(8.5);
     doc.setFont("helvetica", "normal");
 
     const guidelines = [
-      "1. Live class joining link & community access will be sent to your registered Email & WhatsApp before 16 November.",
-      "2. Attend classes on an empty stomach (or at least 2 hours after a light meal) for optimal pranayama practice.",
-      "3. Wear comfortable yoga attire and keep a yoga mat, cushion, and hydration ready.",
-      "4. \"Breathe with Awareness. Practise with Purpose.\" • Support: support@yogaregime.com • +91 98769 63204",
+      "1. Please share your payment screenshot on WhatsApp (+91 98769 63204) to confirm your registration.",
+      "2. After confirmation, you'll receive the Zoom meeting details and further preparation instructions.",
+      "3. Class recordings will be accessible for your regular self-practice throughout the program duration.",
+      "4. \"Sampoorna Yoga: Where body, breath and mind work together.\" • Harpreet Kaur • Yoga Regime",
     ];
 
     let gY = noteY + 13;
@@ -285,14 +285,14 @@ export async function generateAndSaveWorkshopPDF(registrationData, paymentData =
     doc.setFontSize(8);
     doc.setTextColor(...textMuted);
     doc.text(
-      `Yoga Regime • Generated on: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST • Keep this PDF safe for admission`,
+      `Yoga Regime • Harpreet Kaur • Generated on: ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST`,
       pageWidth / 2,
       pageHeight - 12,
       { align: "center" }
     );
 
     // Save/Download PDF to attendee device
-    const fileName = `BREATHWISE_Pass_${(registrationData.fullName || "Attendee").replace(/\s+/g, "_")}_${Date.now().toString().slice(-4)}.pdf`;
+    const fileName = `Sampoorna_Yoga_Pass_${(registrationData.fullName || "Attendee").replace(/\s+/g, "_")}_${Date.now().toString().slice(-4)}.pdf`;
     doc.save(fileName);
 
     return { success: true, fileName };

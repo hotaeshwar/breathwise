@@ -53,8 +53,8 @@ export default function PaymentProgress({ stage = 0 }) {
           {stage === 0 && "Ready to complete enrolment"}
           {stage === 1 && "Connecting to secure payment gateway..."}
           {stage === 2 && "Razorpay checkout active • Complete your payment"}
-          {stage === 3 && "Verifying payment & issuing your BREATHWISE pass..."}
-          {stage === 4 && "✓ Enrolment & payment confirmed!"}
+          {stage === 3 && "Verifying payment & issuing your admission pass..."}
+          {stage === 4 && "Enrolment & payment confirmed!"}
         </p>
       </div>
     </div>
